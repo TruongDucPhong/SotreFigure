@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<h1>User List</h1>
+
+    <table class="table mt-5">
+        <tr>
+            <th>ID</th>
+            <th>LAST NAME</th>
+            <th>UserName</th>
+            <th>Adress</th>
+            <th>PHONE</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in user %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.phonenumber }}</td>
+                <td>
+                    <a href="{{ path('delete_user', {'id': user.id}) }}" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note form{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <a href="{{path('app_san_pham')}}" class='btn btn-primary'>Add</a>
+        <a href="{{path('app_logout')}}" class='btn btn-danger'>Logout</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>STT</td>
+                    <td>Mã SP</td>
+                    <td>Hình ảnh</td>
+                    <td>Tên SP</td>
+                    <td>Giá</td>
+                    <td>Hành động</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sp in data %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{sp.getId()}}</td>
+                        <td><img src="{{asset('uploads/sanpham/' ~ sp.getPhoto())}}" height="150" /></td>
+                        <td>{{sp.getName()}}</td>
+                        <td>{{sp.getPrice()}}</td>
+                        <td>
+                            <a href="{{path('app_edit_san_pham',{'id':sp.getId()})}}" class="btn btn-warning">Edit</a>
+                            <a href="javascript:deletesp('{{path('app_delete_san_pham',{'id':sp.getId()})}}')" class="btn btn-danger">Delete</a>
+                            <form>
+                            <button type="submit" formmethod="post" formaction="{{path('app_cart_add',{'product_id':sp.getId()})}}">Add to cart</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function deletesp(url){
+            if(confirm("Do you delete product?")){
+                window.location.href = url;
+            }
+        }
+    </script>
+
+    {% if message is not empty %}
+        <script>
+            alert("{{message}}");
+            window.location.href = "{{path('app_ds_san_pham')}}";
+        </script>
+    {% endif %}
+
+{% endblock %}

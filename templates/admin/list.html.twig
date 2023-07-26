@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note form{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+<!-- MDB -->
+<link rel="stylesheet" href="/css/mdb.min.css" />
+<!-- Custom styles -->
+<link rel="stylesheet" href="/css/admin.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+  crossorigin="anonymous"></script>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <a href="{{path('app_san_pham')}}" class='btn btn-primary'>Add</a>
+        <a href="{{path('app_logout')}}" class='btn btn-danger'>Logout</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>STT</td>
+                    <td>Mã SP</td>
+                    <td>Hình ảnh</td>
+                    <td>Tên SP</td>
+                    <td>Giá</td>
+                    <td>Hành động</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sp in data %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{sp.getId()}}</td>
+                        <td><img src="{{asset('uploads/sanpham/' ~ sp.getPhoto())}}" height="150" /></td>
+                        <td>{{sp.getName()}}</td>
+                        <td>{{sp.getPrice()}}</td>
+                        <td>
+                            <a href="{{path('app_edit_san_pham',{'id':sp.getId()})}}" class="btn btn-warning">Edit</a>
+                            <a href="javascript:deletesp('{{path('app_delete_san_pham',{'id':sp.getId()})}}')" class="btn btn-danger">Delete</a>
+                            <form>
+                            <button type="submit" formmethod="post" formaction="{{path('app_cart_add',{'product_id':sp.getId()})}}">Add to cart</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function deletesp(url){
+            if(confirm("Do you delete product?")){
+                window.location.href = url;
+            }
+        }
+    </script>
+
+    {% if message is not empty %}
+        <script>
+            alert("{{message}}");
+            window.location.href = "{{path('app_ds_san_pham')}}";
+        </script>
+    {% endif %}
+
+{% endblock %}

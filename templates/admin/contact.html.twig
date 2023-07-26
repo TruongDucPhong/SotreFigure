@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<h1>Contact List</h1>
+
+    <table class="table mt-5">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Actions</th>
+        </tr>
+        {% for contact in contact %}
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.message }}</td>
+                <td>
+                    <a href="{{ path('delete_contact', {'id': contact.id}) }}" onclick="return confirm('Are you sure you want to delete this contact?')">Delete |</a>
+                    <a href="">Reply</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
