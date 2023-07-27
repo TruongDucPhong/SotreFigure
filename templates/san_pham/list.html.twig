@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{loop.index}}</td>
                         <td>{{sp.getId()}}</td>
-                        <td><img src="{{asset('uploads/sanpham/' ~ sp.getPhoto())}}" height="150" /></td>
+                        <td><img src="{{asset('/uploads/sanpham' ~ sp.getPhoto())}}" height="150" /></td>
                         <td>{{sp.getName()}}</td>
                         <td>{{sp.getPrice()}}</td>
                         <td>
