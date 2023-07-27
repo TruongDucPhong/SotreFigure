@@ -14,6 +14,7 @@
             <th>Actions</th>
         </tr>
         {% for contact in contact %}
+    
             <tr>
                 <td>{{ contact.id }}</td>
                 <td>{{ contact.name }}</td>
@@ -24,6 +25,8 @@
                     <a href="">Reply</a>
                 </td>
             </tr>
+            
         {% endfor %}
     </table>
+
     {% endblock %}

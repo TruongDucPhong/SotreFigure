@@ -20,7 +20,7 @@ use App\Form\SanPhamType;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Knp\Component\Pager\PaginatorInterface;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class AdminController extends AbstractController
@@ -61,7 +61,7 @@ class AdminController extends AbstractController
 
             $em->persist($data);
             $em->flush();
-            return new RedirectResponse($this->urlGenerator->generate('app_ds_san_pham'));
+            return new RedirectResponse($this->urlGenerator->generate('list_product'));
         }
 
         return $this->render('san_pham/index.html.twig', [
@@ -115,5 +115,6 @@ public function viewUser(EntityManagerInterface $em): Response
 
         return $this->redirectToRoute('admin/user.html.twig');
     }
+
 }
 
