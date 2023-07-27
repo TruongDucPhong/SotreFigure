@@ -1,8 +1,17 @@
 {% form_theme sp_form 'bootstrap_4_layout.html.twig' %}
 {% extends 'base.html.twig' %}
-
 {% block title %}Note form{% endblock %}
-
+{% block stylesheets %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+<!-- MDB -->
+<link rel="stylesheet" href="/css/mdb.min.css" />
+<!-- Custom styles -->
+<link rel="stylesheet" href="/css/admin.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+  crossorigin="anonymous"></script>
+{% endblock %}
 {% block body %}
     <div class="container mt-5 pt-5">
         {{form_start(sp_form)}}

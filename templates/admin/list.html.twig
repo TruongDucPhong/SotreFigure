@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Note form{% endblock %}
-
 {% block stylesheets %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 <!-- Google Fonts Roboto -->
@@ -17,15 +16,15 @@
     <div class="container">
         <a href="{{path('app_san_pham')}}" class='btn btn-primary'>Add</a>
         <a href="{{path('app_logout')}}" class='btn btn-danger'>Logout</a>
-        <table class="table">
+        <table class="table mt-5">
             <thead>
                 <tr>
                     <td>STT</td>
-                    <td>Mã SP</td>
-                    <td>Hình ảnh</td>
-                    <td>Tên SP</td>
-                    <td>Giá</td>
-                    <td>Hành động</td>
+                    <td>ID Product</td>
+                    <td>Image </td>
+                    <td>Product name</td>
+                    <td>Price</td>
+                    <td>Action</td>
                 </tr>
             </thead>
             <tbody>
@@ -33,15 +32,12 @@
                     <tr>
                         <td>{{loop.index}}</td>
                         <td>{{sp.getId()}}</td>
-                        <td><img src="{{asset('uploads/sanpham/' ~ sp.getPhoto())}}" height="150" /></td>
+                        <td><img src="{{asset('uploads/sanpham/' ~ sp.Photo())}}" height="150" /></td>
                         <td>{{sp.getName()}}</td>
                         <td>{{sp.getPrice()}}</td>
                         <td>
                             <a href="{{path('app_edit_san_pham',{'id':sp.getId()})}}" class="btn btn-warning">Edit</a>
-                            <a href="javascript:deletesp('{{path('app_delete_san_pham',{'id':sp.getId()})}}')" class="btn btn-danger">Delete</a>
-                            <form>
-                            <button type="submit" formmethod="post" formaction="{{path('app_cart_add',{'product_id':sp.getId()})}}">Add to cart</button>
-                            </form>
+                            <a href="javascript:deletesp('{{path('app_delete_san_pham',{'id':sp.getId()})}}')" class="btn btn-danger">Delete</a>  
                         </td>
                     </tr>
                 {% endfor %}
@@ -61,7 +57,7 @@
     {% if message is not empty %}
         <script>
             alert("{{message}}");
-            window.location.href = "{{path('app_ds_san_pham')}}";
+            window.location.href = "{{path('list_product')}}";
         </script>
     {% endif %}
 

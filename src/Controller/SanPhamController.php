@@ -52,7 +52,7 @@ class SanPhamController extends AbstractController
         $query = $em->createQuery('SELECT sp FROM App\Entity\SanPham sp');
         $lSp = $query->getResult();
         $message = $req->query->get('message');
-        return $this->render('san_pham/list.html.twig', [
+        return $this->render('admin/list.html.twig', [
             "data"=>$lSp,
             "message"=>$message
         ]);
@@ -74,7 +74,7 @@ class SanPhamController extends AbstractController
             }
             $sp->setName($data->getName())->setPrice($data->getPrice());
             $em->flush();
-            return new RedirectResponse($this->urlGenerator->generate('app_ds_san_pham'));
+            return new RedirectResponse($this->urlGenerator->generate('list_product'));
         }
 
         return $this->render('san_pham/index.html.twig', [
@@ -88,7 +88,7 @@ class SanPhamController extends AbstractController
         $sp = $em->find(SanPham::class, $id);
         $em->remove($sp);
         $em->flush();
-        return new RedirectResponse($this->urlGenerator->generate('app_ds_san_pham'));
+        return new RedirectResponse($this->urlGenerator->generate('list_product'));
     }
 
     #[Route('/cate/{id}', name: 'app_ds_san_pham_in_category')]
