@@ -21,8 +21,8 @@
                 <td>{{ contact.email }}</td>
                 <td>{{ contact.message }}</td>
                 <td> 
-                    <a href="{{ path('delete_contact', {'id': contact.id}) }}" onclick="return confirm('Are you sure you want to delete this contact?')">Delete |</a>
-                    <a href="">Reply</a>
+                    <a class="font-weight-bold" href="{{ path('delete_contact', {'id': contact.id}) }}" onclick="return confirm('Are you sure you want to delete this contact?')">Delete |</a>
+                    <a class="font-weight-bold" href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">Reply</a>
                 </td>
             </tr>
             
