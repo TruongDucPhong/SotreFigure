@@ -1,13 +1,14 @@
 {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
+
 <div class="container">
     <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm, { 'attr': { 'id': 'registrationForm' } }) }}
         {{ form_row(registrationForm.username) }}
         {{ form_row(registrationForm.first_name) }}
         {{ form_row(registrationForm.last_name) }}
@@ -17,6 +18,32 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+        <button type="button" class="btn btn-secondary" onclick="togglePassword()">Toggle Password</button>
+    
     {{ form_end(registrationForm) }}
 </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+    function clearForm() {
+        const form = document.getElementById("registrationForm");
+        form.reset();
+    }
+
+     function togglePassword() {
+        const passwordField = document.getElementById("{{ registrationForm.plainPassword.vars.id }}");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
+
 {% endblock %}
