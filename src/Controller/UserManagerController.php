@@ -19,7 +19,7 @@ class UserManagerController extends AbstractController
     {
     }
     
-    #[Route('/user/manager', name: 'app_user_manager')]
+    #[Route('/listuser', name: 'app_user_manager')]
     public function index(EntityManagerInterface $em): Response
     {
         $query = $em->createQuery('SELECT u FROM App\Entity\User u');
@@ -53,4 +53,39 @@ class UserManagerController extends AbstractController
             'u_form' => $form->createView(),
         ]);
     }
+    #[Route('/user/manager/{id}', name: 'app_edit_user')]
+        public function editUser(Request $request, User $user,int $id, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
+        { 
+            $sp = $entityManager->find(User::class, $id);
+            $form = $this->createForm(UserFormType::class, $user);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Handle password update
+                if ($form->get('plainPassword')->getData()) {
+                    
+                    $hashedPassword = $userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData());
+                    $user->setPassword($hashedPassword);
+                }
+                $entityManager->flush();
+                return $this->redirectToRoute('app_user_manager');
+            }
+            return $this->render('user_manager/form.html.twig', [
+                'u_form' => $form->createView(),
+            ]);
+        }
+        
+        #[Route('/user/manager/delete', name: 'app_delete_user_manager')]
+    public function delete(EntityManagerInterface $em, int $id, Request $req): Response
+        {
+            $u = $em->find(User::class, $id); 
+            $em->remove($u);
+        }
+        #[Route('/san/pham/delete', name: 'app_delete_user')]
+        public function deleteuser(EntityManagerInterface $em,int $id,UserName $name, Request $req): Response
+        {
+            $u = $em->find(SanPham::class,$id );
+            $em->remove($sp);
+            $em->flush();
+            return new RedirectResponse($this->urlGenerator->generate('app_user_manager'));
+        }
 }

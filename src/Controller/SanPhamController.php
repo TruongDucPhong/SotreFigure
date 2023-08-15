@@ -66,6 +66,7 @@ class SanPhamController extends AbstractController
         $form->handleRequest($req);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $data = $form->getData();
 
             $file = $form->get("photo")->getData();

@@ -17,6 +17,7 @@ class SanPhamType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        
         $builder
             ->add('name',TextType::class)
             ->add('price',NumberType::class)
@@ -34,6 +35,7 @@ class SanPhamType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        
         $resolver->setDefaults([
             'data_class' => SanPham::class,
         ]);
