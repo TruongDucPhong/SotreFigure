@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} List Contact!{% endblock %}
+
+
+
+{% block body %}
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="{{asset('css/feedback.css')}}"/>
+  <body class="bg-dark">
+    <div class="container">
+     <a href="{{path('app_ds_san_pham')}}" class='btn btn-primary'>B-9ack</a>
+        <div class="row">
+            <div class="col m-auto">
+                <div class="card mt-5">
+                <div class="card-header">
+                    <h2 class="display-6 text-center">List Contact!</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered text-center">
+                        <tr class="bg-dark text-white"> 
+                            <td> No </td>   
+                            <td>  Name </td>
+                            <td> Email </td>
+                            {# <td> Time </td> #}
+                            <td> Message </td>
+                            <td> Act </td>
+                        </tr> 
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+         <tbody>
+            {% for fb in data %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{fb.getname()}}</td>
+                
+
+                    <td>{{fb.getEmail()}}</td>
+                    {# <td>{{fb.getTime()}}</td> #}
+                
+                    <td>{{fb.getMessage()}}</td>
+                    <td>
+                        <a href="javascript:deletefb('{{path('app_delete_feedback',{'id':fb.getId()})}}')" class="btn btn-warning"> Delete</a>
+                    </td> 
+                </tr>
+             {% endfor %}
+            </tbody>
+        </table>
+    </div>
+             {% endblock %}
+             {% block javascripts %}
+               <script>
+                 function deletefb(url){
+                   if(confirm("Do you delete feedback?")){
+                       window.location.href = url;
+                   }
+                 }
+               </script>
+            </body>
+{% endblock %}

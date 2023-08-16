@@ -23,7 +23,7 @@
                         <td>{{u.getFirstName()}} {{u.getLastName()}}</td>
                         <td>
                             <a href="{{path('app_edit_user',{'id':u.getId()})}}" class="btn btn-warning">Edit</a>
-                            <a href="javascript:deleteuser('{{path('app_delete_user_manager',{'id':u.getId()})}}')" class="btn btn-danger">Delete</a>
+                            <a href="javascript:deleteuser('{{path('app_delete_user',{'id':u.getId()})}}')" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
