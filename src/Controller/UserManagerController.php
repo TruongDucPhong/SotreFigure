@@ -75,17 +75,20 @@ class UserManagerController extends AbstractController
         }
         
         #[Route('/user/manager/delete', name: 'app_delete_user_manager')]
-    public function delete(EntityManagerInterface $em, int $id, Request $req): Response
+    public function delete(EntityManagerInterface $em, int $id, Request $req,User $user): Response
         {
             $u = $em->find(User::class, $id); 
             $em->remove($u);
-        }
-        #[Route('/san/pham/delete', name: 'app_delete_user')]
-        public function deleteuser(EntityManagerInterface $em,int $id,UserName $name, Request $req): Response
-        {
-            $u = $em->find(SanPham::class,$id );
-            $em->remove($sp);
             $em->flush();
             return new RedirectResponse($this->urlGenerator->generate('app_user_manager'));
         }
+        // #[Route('/san/pham/delete', name: 'app_delete_user')]
+        // public function deleteuser(EntityManagerInterface $em,int $id,UserName $name, Request $req): Response
+        // {
+        //     $u = $em->find(SanPham::class,$id );
+            
+        //     $em->remove($sp);
+        //     $em->flush();
+        //     return new RedirectResponse($this->urlGenerator->generate('app_user_manager'));
+        // }
 }
